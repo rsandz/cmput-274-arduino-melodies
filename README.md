@@ -1,5 +1,5 @@
 # cmput-274-arduino-melodies
-## By Imtisal Ahmad and Ryan Sandoval
+**By Imtisal Ahmad and Ryan Sandoval**
 
 
 ## Features:
