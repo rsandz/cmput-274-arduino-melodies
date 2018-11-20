@@ -2,11 +2,10 @@
 * 
 */
 #include <Arduino.h>
-#include <Keyboard.h>
 
 void setup()
 {
-    Keyboard.begin();
+    Serial.begin(9600);
     char key;
 }
 
@@ -17,11 +16,13 @@ void setup()
 */
 void press(key)
 {
-    while(True)
+    if(Serial.available()>0)
     {
-        Keyboard.Press(key);
-        Keyboard.releaseAll();
+       key = Serial.read();
+       Serial.println(key); //just for testing take it out later!
     }
+        
+    
 }
 /**This function uses a switch statement to assign frequencies to the key values.Then it passes the key 
 *frequency value to the main() function which will decide what frequency or musical note to play for the corresponding keys 
