@@ -3,9 +3,10 @@
 */
 
 // Includes //
+#include "config.h"
 #include "input.h"
 #include "tone.h"
-#include "config.h"
+#include "test.h"
 #include <Arduino.h>
 
 /**
@@ -23,12 +24,7 @@ void setup()
 int main()
 {
     setup();
-    play_tone(523.2511, 500);
-    play_tone(523.2511, 500);
-    play_tone(783.9909, 500);
-    play_tone(783.9909, 500);
-    play_tone(880.0000, 500);
-    play_tone(880.0000, 500);
-    play_tone(783.9909, 500);
+    scale_test();
+    Serial.print("Done Playing A");
     return 0;
 }
