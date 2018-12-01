@@ -1,19 +1,34 @@
-/** Description: This file will create serveral arrays that hold the beats and the frquencies of certain songs to be played 
-*by the buzzer. It will also have 2 structs that will hold these arrays
+/*
+    Contains the songs for the buzzers
 */
-#include <Arduino.h>
 
-void setup()
-{
-    Serial.begin(9600);
-    char key;
-}
+#ifndef SONGS_H
+#define SONGS_H
 
-int main()
+/*
+================
+|   Structs    |
+================
+*/
+
+struct Track
 {
-    float freq1[] = {}
-}
-//arrays 
-//freq array 
-//beat array 
-//struct with the two arrays 
+    float freq[];
+    float beats[];
+};
+
+struct Song 
+{
+    struct Track tracks[];
+};
+
+/*
+===============
+|   Songs     |
+===============
+*/
+
+const struct Song twinkle_twinkle;
+
+
+#endif
