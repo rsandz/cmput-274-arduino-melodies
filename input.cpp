@@ -1,142 +1,76 @@
-/** Description: This file will convert all of our key board inputs into musical notes as if a real piano were to be playing 
-* 
-*/
+/** 
+ * Description: 
+ * This file will convert all of our key board inputs into musical notes as if a real piano were to be playing 
+ */
+
 #include <Arduino.h>
+#include "config.h"
+// #include <Keyboard.h>
 
-void setup()
+/**
+ * This function uses a switch statement to assign frequencies to the key values.Then it passes the key 
+ * frequency value to the main() function which will decide what frequency or musical note to play for the corresponding keys 
+ * pressed.
+ * @key char stores the ascii value of the key pushed on the keyboard
+ * @note float  holds the musical notes or frequencies associated with the corresponding keys 
+ */
+float keyboard_to_freq(char key)
 {
-    Serial.begin(9600);
-    char key;
-}
-
-/**This function just keeps on going until any key on our imaginary keyboard is pressed.Then it passes the key 
-*ascii value to the keyboard() function which will decide what frequency or musical note to play for the corresponding keys 
-*pressed.
-*@key char stores the ascii value of the key pushed on the keyboard
-*/
-void press(key)
-{
-    if(Serial.available()>0)
-    {
-       key = Serial.read();
-       Serial.println(key); //just for testing take it out later!
-    }
-        
-    
-}
-/**This function uses a switch statement to assign frequencies to the key values.Then it passes the key 
-*frequency value to the main() function which will decide what frequency or musical note to play for the corresponding keys 
-*pressed.
-*@key char stores the ascii value of the key pushed on the keyboard
-*@note float  holds the musical notes or frequencies associated with the corresponding keys 
-*/
-void keyboard(key)
 //paino key board only recognizes the "d"to "k" for the white parts, "r" to "i" for the black parts. 
-{
     float note;
     // 12 cases  11 for the piano and 1 for all other keys 
-    switch(note)
+    Serial.print((char) key);
+    switch((char) key)
     {
-        //all the whites 
-        case 1:
-        {
-            if (key == "d")
-            {
-                note =  ;//frequency for A 
-            }
-        }
+        //all the whites
+        case 'd': 
+            note = A; // frequency for A 
+            break;
 
-        case 2:
-        {
-            if (key == "f")
-            {
-                note =  ;//frequency for B 
-            }
-        }
+        case 'f': 
+            note = B; // frequency for B 
+            break;
 
-        case 3:
-        {
-            if (key == "g")
-            {
-                note =   ;//frequency for C
-            }
-        }
+        case 'g': 
+            note = C; // frequency for C
+            break;
 
-        case 4:
-        {
-            if (key == "h")
-            {
-                note =  ;//frequency for D 
-            }
-        }
+        case 'h': 
+            note = D; // frequency for D 
+            break;
 
-        case 5:
-        {
-            if (key == "j")
-            {
-                note =  ;//frequency for E
-            }
-        }
-
-        case 6:
-        {
-            if (key == "k")
-            {
-                note =  ;//frequency for G 
-            }
-        }
+        case 'j': 
+            note = E; // frequency for E
+            break;
+        
+        case 'k': 
+            note = F; // frequency for F
+            break;
+        
         //now the black parts 
-        case 7:
-        {
-            if (key == "r")
-            {
-                note =  ;//frequency for d
-            }
-        }
+        case 'r': 
+            note =  d; // frequency for d
+            break;
 
-        case 8:
-        {
-            if (key == "t")
-            {
-                note =  ;//frequency for e 
-            }
-        }
+        case 't': 
+            note =  e; // Frequency for e
+            break;
 
-        case 9:
-        {
-            if (key == "y")
-            {
-                note =  ;//frequency for g
-            }
-        }
+        case 'y': 
+            note =  g; // frequency for g
+            break;
 
-        case 10:
-        {
-            if (key == "u")
-            {
-                note =  ;//frequency for a 
-            }
-        }
+        case 'u':  
+            note =  a; // frequency for a
+            break;
 
-        case 11:
-        {
-            if (key == "i")
-            {
-                note =  ;//frequency for b
-            }
-        }
+        case 'i': 
+            note =  b; // frequency for b
+            break;
+        
         // now the other case 
         default: note = 0;
     }
+
     return note;
-
-}
-/**This function calls all the other functions in order to get the frequencies for each key pressed on the piano player.
-*/
-
-int main()
-{
-    setup();
-    press();
-    keyboard();
 }

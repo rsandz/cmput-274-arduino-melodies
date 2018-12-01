@@ -3,9 +3,10 @@
 */
 
 // Includes //
+#include "config.h"
 #include "input.h"
 #include "tone.h"
-#include "config.h"
+#include "test.h"
 #include <Arduino.h>
 
 /**
@@ -22,13 +23,22 @@ void setup()
 
 int main()
 {
+    char key;
+    float freq;
     setup();
-    play_tone(523.2511, 500);
-    play_tone(523.2511, 500);
-    play_tone(783.9909, 500);
-    play_tone(783.9909, 500);
-    play_tone(880.0000, 500);
-    play_tone(880.0000, 500);
-    play_tone(783.9909, 500);
+    scale_test();
+    twinkle();
+    while (true)
+    {
+        if(Serial.available()>0)
+        {
+            key = Serial.read();
+            Serial.println(key); //just for testing take it out later!
+            freq = keyboard_to_freq((char) key);
+            Serial.print("Playing Freq: ");
+            Serial.println(freq);
+            play_tone(freq, 150);
+        }
+    }
     return 0;
 }
