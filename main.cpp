@@ -55,6 +55,10 @@ int main()
                 setup();
                 scale_test();
                 twinkle();
+                // sound sets a difference frequencies to the keyboard 
+                char sound;
+                Serial.print("Pick a setting that you want to play: Z, X, C");
+                sound = check();
                // while (true)
                 //{
                     //if(Serial.available()>0)
