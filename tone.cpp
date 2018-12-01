@@ -48,7 +48,7 @@ Player::Player()
  * cycle() will then update the buzzers based on voice in order to make music.
  */
 
-void Player::assign_voice(float* freq, int* note_lengths, int buzzer_pin)
+void Player::assign_voice(float* freq, float* note_lengths, int buzzer_pin)
 {
     if (total_voices < num_buzzers)
     {
@@ -92,7 +92,7 @@ void Player::update_next_note(int voice_index)
     period = (1 / (voice->freq_arr[voice->song_index])) * 1000000L;
     voice->us_half_period = (long) period / 2L;
     voice->us_toggle = voice->us_half_period;
-    voice->us_end = (long)(voice->note_lengths[voice->song_index]) * 1000L;
+    voice->us_end = (voice->note_lengths[voice->song_index]) * 1000L;
     voice->song_index ++;
 
     if (DEBUG)
@@ -101,7 +101,9 @@ void Player::update_next_note(int voice_index)
         Serial.print(voice->freq_arr[voice->song_index]);
         Serial.print("Hz at period ");
         Serial.print(period);
-        Serial.println("us ");
+        Serial.print("us for ");
+        Serial.print(voice->us_end);
+        Serial.println(" us");
     }
 }
 

@@ -50,7 +50,7 @@ struct Voice {
     /**
      * How long to play each of the above frequencies
      */
-    int* note_lengths;
+    float* note_lengths;
 };
 
 class Player
@@ -63,7 +63,7 @@ class Player
     int song_end_index;
     bool song_end;
     Player();
-    void assign_voice(float* freq, int* note_lengths, int buzzer_pin);
+    void assign_voice(float* freq, float* note_lengths, int buzzer_pin);
     void update_next_note(int voice_index);
     void toggle_voice_buzzer(int voice_index);
     void decrement_times(int voice_index);
