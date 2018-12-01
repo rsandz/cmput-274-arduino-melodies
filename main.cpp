@@ -47,7 +47,7 @@ int main()
         choice = check();
         switch((char) choice)
         {
-            case "p":
+            case 'p':
             {
               // keyboard piano player 
                 char key;
@@ -70,30 +70,30 @@ int main()
                 break; 
             }
 
-            case "t":
+            case 't':
             {
                 //This is the track player case 
                 // ask them wha track do they want to play out of the three ---> nested Switch statements 
-                char track;
+                int track;
                 Serial.print("Choose a track: 1-twinkle twinkle, 2-hicory dickory dock, 3-ABC");
                 track = check();
-                switch((char) track)
+                switch( track)
                 {
                     //twinkle twinkle track 
-                    case "1":
+                    case 1:
                     {
 
                         break;
                     }
 
                     //Hicory Dickory Dock 
-                    case "2":
+                    case 2:
                     {
                         break;
                     }
 
                     //ABC
-                    case "3":
+                    case 3:
                     {
                         break;
                     }
@@ -101,7 +101,7 @@ int main()
                 break;
             }
 
-            default: Serial.print("Error: Please start again")
+            default: Serial.print("Error: Please start again");
         }
     return 0;
 }
