@@ -19,7 +19,10 @@ void setup()
     Serial.begin(9600);
 
    // Setup buzzer pins
-   pinMode(buzzer1_pin, OUTPUT); 
+   for (int i = 0; i < num_buzzers; i++)
+   {
+       pinMode(buzzer_pins[i], OUTPUT); 
+   }
 }
 char check()
 { 

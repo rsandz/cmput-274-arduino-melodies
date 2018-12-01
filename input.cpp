@@ -5,7 +5,6 @@
 
 #include <Arduino.h>
 #include "config.h"
-// #include <Keyboard.h>
 
 /**
  * This function uses a switch statement to assign frequencies to the key values.Then it passes the key 
@@ -24,48 +23,48 @@ float keyboard_to_freq(char key)
     {
         //all the whites
         case 'd': 
-            note = A; // frequency for A 
+            note = _A4; // frequency for A 
             break;
 
         case 'f': 
-            note = B; // frequency for B 
+            note = B4; // frequency for B 
             break;
 
         case 'g': 
-            note = C; // frequency for C
+            note = C4; // frequency for C
             break;
 
         case 'h': 
-            note = D; // frequency for D 
+            note = D4; // frequency for D 
             break;
 
         case 'j': 
-            note = E; // frequency for E
+            note = E4; // frequency for E
             break;
         
         case 'k': 
-            note = F; // frequency for F
+            note = F4; // frequency for F
             break;
         
         //now the black parts 
         case 'r': 
-            note =  d; // frequency for d
+            note =  d4; // frequency for d
             break;
 
         case 't': 
-            note =  e; // Frequency for e
+            note =  e4; // Frequency for e
             break;
 
         case 'y': 
-            note =  g; // frequency for g
+            note =  g4; // frequency for g
             break;
 
         case 'u':  
-            note =  a; // frequency for a
+            note =  a4; // frequency for a
             break;
 
         case 'i': 
-            note =  b; // frequency for b
+            note =  b4; // frequency for b
             break;
         
         // now the other case 
