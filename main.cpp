@@ -18,27 +18,27 @@ void setup()
     Serial.begin(9600);
 
    // Setup buzzer pins
-   pinMode(buzzer1_pin, OUTPUT); 
+   for (int i = 0; i < num_buzzers; i++)
+   {
+       pinMode(buzzer_pins[i], OUTPUT); 
+   }
 }
 
 int main()
 {
-    char key;
-    float freq;
+    Player player;
     setup();
-    scale_test();
-    twinkle();
-    while (true)
-    {
-        if(Serial.available()>0)
-        {
-            key = Serial.read();
-            Serial.println(key); //just for testing take it out later!
-            freq = keyboard_to_freq((char) key);
-            Serial.print("Playing Freq: ");
-            Serial.println(freq);
-            play_tone(freq, 150);
-        }
-    }
+    // scale_test();
+    // twinkle();
+
+    float freq[] = {C4, C4, G4, G4, _A5, _A5, G4, G4, -1};
+    float freq2[] = {C3, C4, E4, C4, F4, C4, E4, C4, -1};
+    int note_length[] = {500, 500, 500, 500, 500, 500, 500, 500};
+    int note_length2[] = {500, 500, 500, 500, 500, 500, 500, 500};
+    player.assign_voice(freq, note_length, buzzer_pins[0]);
+    player.assign_voice(freq2, note_length2, buzzer_pins[1]);
+    player.start();
+    Serial.print("Done");
+    Serial.flush();
     return 0;
 }

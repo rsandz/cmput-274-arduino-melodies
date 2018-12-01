@@ -7,35 +7,35 @@
 
 void scale_test()
 {
-    play_tone(C , 200);
-    play_tone(d , 200);
-    play_tone(D , 200);
-    play_tone(e , 200);
-    play_tone(E , 200);
-    play_tone(F , 200);
-    play_tone(g , 200);
-    play_tone(G , 200);
-    play_tone(a , 200);
-    play_tone(A , 200);
-    play_tone(b , 200);
-    play_tone(B , 200);
+    play_tone(a4 , 200);
+    play_tone(_A4 , 200);
+    play_tone(b4 , 200);
+    play_tone(B4 , 200);
+    play_tone(C4 , 200);
+    play_tone(d4 , 200);
+    play_tone(D4 , 200);
+    play_tone(e4 , 200);
+    play_tone(E4 , 200);
+    play_tone(F4 , 200);
+    play_tone(g4 , 200);
+    play_tone(G4 , 200);
 }
 
 void twinkle()
 {
     delay(1000);
-    play_tone(C, 500);
-    play_tone(C, 500);
-    play_tone(G, 500);
-    play_tone(G, 500);
-    play_tone(nA5, 500);
-    play_tone(nA5, 500);
-    play_tone(G, 1000);
-    play_tone(F, 500);
-    play_tone(F, 500);
-    play_tone(E, 500);
-    play_tone(E, 500);
-    play_tone(D, 500);
-    play_tone(D, 500);
-    play_tone(C, 1000);
+    play_tone(C4, 500);
+    play_tone(C4, 500);
+    play_tone(G4, 500);
+    play_tone(G4, 500);
+    play_tone(_A5, 500);
+    play_tone(_A5, 500);
+    play_tone(G4, 1000);
+    // play_tone(F4, 500);
+    // play_tone(F4, 500);
+    // play_tone(E4, 500);
+    // play_tone(E4, 500);
+    // play_tone(D4, 500);
+    // play_tone(D4, 500);
+    // play_tone(C4, 1000);
 }
