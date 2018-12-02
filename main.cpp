@@ -45,6 +45,9 @@ void manual_loop()
     // keyboard piano player 
     char key;
     float freq;
+    char sound;
+    Serial.print("Pick a setting that you want to play: Z, X, C");
+    sound = check();
     while (true)
     {
         key = check(); //Serial.read();
