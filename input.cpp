@@ -13,181 +13,205 @@
  * @key char stores the ascii value of the key pushed on the keyboard
  * @note float  holds the musical notes or frequencies associated with the corresponding keys 
  */
-float keyboard_to_freq(char sound,char key)
+float keyboard_to_freq(char sound, char key)
 {
 //paino key board only recognizes the "d"to "k" for the white parts, "r" to "i" for the black parts. 
     float note;
     // 12 cases  11 for the piano and 1 for all other keys 
-    switch((char) sound)
+    switch(sound)
     {
         case 'z':
         {
-            Serial.print((char) key);
-            switch((char) key)
+            switch(key)
             {
                 //all the whites
                 case 'd': 
-                    note = _A4; // frequency for A 
+                    note = C3; 
                     break;
 
                 case 'f': 
-                    note = B4; // frequency for B 
+                    note = D3;
                     break;
 
                 case 'g': 
-                    note = C4; // frequency for C
+                    note = E3; 
                     break;
 
                 case 'h': 
-                    note = D4; // frequency for D 
+                    note = F3; 
                     break;
 
                 case 'j': 
-                    note = E4; // frequency for E
+                    note = G3; 
                     break;
                 
                 case 'k': 
-                    note = F4; // frequency for F
+                    note = _A3; 
+                    break;
+
+                case 'l': 
+                    note = B3; 
+                    break;
+                case ';': 
+                    note = C4; 
                     break;
                 
                 //now the black parts 
                 case 'r': 
-                    note =  d4; // frequency for d
+                    note =  d3; 
                     break;
 
                 case 't': 
-                    note =  e4; // Frequency for e
+                    note =  e3; 
                     break;
 
-                case 'y': 
-                    note =  g4; // frequency for g
+                case 'u': 
+                    note =  g3; 
                     break;
 
-                case 'u':  
-                    note =  a4; // frequency for a
+                case 'i':  
+                    note =  a3; 
                     break;
 
-                case 'i': 
-                    note =  b4; // frequency for b
+                case 'o': 
+                    note =  b3; 
                     break;
                 
                 // now the other case 
                 default: note = 0;
             }  
+            break;
         }
 
         //second case of frequiencies 
          case 'x':
         {
-            Serial.print((char) key);
             switch((char) key)
             {
                 //all the whites
                 case 'd': 
-                    note = _A4; // frequency for A 
+                    note = C4; 
                     break;
 
                 case 'f': 
-                    note = B4; // frequency for B 
+                    note = D4;
                     break;
 
                 case 'g': 
-                    note = C4; // frequency for C
+                    note = E4; 
                     break;
 
                 case 'h': 
-                    note = D4; // frequency for D 
+                    note = F4; 
                     break;
 
                 case 'j': 
-                    note = E4; // frequency for E
+                    note = G4; 
                     break;
                 
                 case 'k': 
-                    note = F4; // frequency for F
+                    note = _A4; 
+                    break;
+
+                case 'l': 
+                    note = B4; 
+                    break;
+                
+                case ';': 
+                    note = C5; 
                     break;
                 
                 //now the black parts 
                 case 'r': 
-                    note =  d4; // frequency for d
+                    note =  d4; 
                     break;
 
                 case 't': 
-                    note =  e4; // Frequency for e
+                    note =  e4; 
                     break;
 
-                case 'y': 
-                    note =  g4; // frequency for g
+                case 'u': 
+                    note =  g4; 
                     break;
 
-                case 'u':  
-                    note =  a4; // frequency for a
+                case 'i':  
+                    note =  a4; 
                     break;
 
-                case 'i': 
-                    note =  b4; // frequency for b
+                case 'o': 
+                    note =  b4; 
                     break;
+                
                 
                 // now the other case 
                 default: note = 0;
             }  
+            break;
         }
 
         //third case of frequiencies 
          case 'c':
         {
-            Serial.print((char) key);
-            switch((char) key)
+            switch(key)
             {
                 //all the whites
                 case 'd': 
-                    note = _A4; // frequency for A 
+                    note = C5; 
                     break;
 
                 case 'f': 
-                    note = B4; // frequency for B 
+                    note = D5;
                     break;
 
                 case 'g': 
-                    note = C4; // frequency for C
+                    note = E5; 
                     break;
 
                 case 'h': 
-                    note = D4; // frequency for D 
+                    note = F5; 
                     break;
 
                 case 'j': 
-                    note = E4; // frequency for E
+                    note = G5; 
                     break;
                 
                 case 'k': 
-                    note = F4; // frequency for F
+                    note = _A5; 
+                    break;
+
+                case 'l': 
+                    note = B5; 
+                    break;
+                
+                case ';': 
+                    note = C6; 
                     break;
                 
                 //now the black parts 
                 case 'r': 
-                    note =  d4; // frequency for d
+                    note =  d5; 
                     break;
 
                 case 't': 
-                    note =  e4; // Frequency for e
+                    note =  e5; 
                     break;
 
-                case 'y': 
-                    note =  g4; // frequency for g
+                case 'u': 
+                    note =  g5; 
                     break;
 
-                case 'u':  
-                    note =  a4; // frequency for a
+                case 'i':  
+                    note =  a5; 
                     break;
 
-                case 'i': 
-                    note =  b4; // frequency for b
+                case 'o': 
+                    note =  b5; 
                     break;
                 
                 // now the other case 
                 default: note = 0;
             }  
+            break;
         }
         // now the other case 
         default: note = 0;

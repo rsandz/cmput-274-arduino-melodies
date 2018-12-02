@@ -43,16 +43,15 @@ char check()
 void manual_loop()
 {
     // keyboard piano player 
-    char key;
+    char key, sound;
     float freq;
-    char sound;
-    Serial.print("Pick a setting that you want to play: Z, X, C");
+    Serial.print("Pick a setting that you want to play: z - Low pitch, x - Mid Pitch, c - High Pitch");
     sound = check();
     while (true)
     {
         key = check(); //Serial.read();
         Serial.println(key); //just for testing take it out later!
-        freq = keyboard_to_freq((char) key);
+        freq = keyboard_to_freq((char) sound, (char) key);
         Serial.print("Playing Freq: ");
         Serial.println(freq);
         play_tone(freq, 150);
