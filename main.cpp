@@ -7,8 +7,9 @@
 #include "input.h"
 #include "tone.h"
 #include "test.h"
-#include <Arduino.h>
 #include  "songs.h"
+#include  "utilities.h"
+#include <Arduino.h>
 
 /**
  * Setup for lowlevel arduino functionality
@@ -62,23 +63,36 @@ void automatic_loop()
     int track;
     Serial.println("Choose a track: 1-twinkle twinkle, 2-hicory dickory dock, 3-ABC");
     track = check();
-    switch( track)
+    Serial.println(track);
+    switch((char) track)
     {
         //twinkle twinkle track 
-        case 1:
+        case '1':
         {
+            if (DEBUG) Serial.print("Assigning Voices...");
+            Player player;
+            int song_length = sizeof(twinkle_twinkle.tracks[0].freq) / sizeof(twinkle_twinkle.tracks[0].freq[0]);
 
+            float* beats0 = twinkle_twinkle.tracks[0].beats;
+            convert_to_period(beats0, beats_per_min, song_length);
+            player.assign_voice(twinkle_twinkle.tracks[0].freq, beats0, buzzer_pins[0]);
+
+            float* beats1 = twinkle_twinkle.tracks[1].beats;
+            convert_to_period(beats1, beats_per_min, song_length);
+            player.assign_voice(twinkle_twinkle.tracks[1].freq, beats1, buzzer_pins[1]);
+            
+            player.start();
             break;
         }
 
         //Hicory Dickory Dock 
-        case 2:
+        case '2':
         {
             break;
         }
 
         //ABC
-        case 3:
+        case '3':
         {
             break;
         }
@@ -114,5 +128,7 @@ int main()
         default: Serial.print("Error: Please start again");
     }
 
+    Serial.print("Done");
+    Serial.flush();
     return 0;
 }

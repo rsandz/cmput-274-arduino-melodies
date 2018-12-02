@@ -9,6 +9,7 @@
 const int num_buzzers = 2;
 const int buzzer_pins[] = {12, 11};
 const int DEBUG = true;
+const int beats_per_min = 100;
 
 // Definitions for some Notes
 // Note: we put _ infrom of 'A's to prevent name collision
