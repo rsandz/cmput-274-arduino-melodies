@@ -63,15 +63,15 @@ void automatic_loop()
     //This is the track player case 
     // Ask them wha track do they want to play out of the three ---> nested Switch statements 
     int track;
-    Serial.println("Choose a track: 1-twinkle twinkle, 2-hicory dickory dock, 3-ABC");
+    Serial.println("Choose a track: 1-twinkle twinkle, 2-jingle-bell-rock, 3-ABC");
     track = check();
     Serial.println(track);
+    if (DEBUG) Serial.print("Assigning Voices...");
     switch((char) track)
     {
         //twinkle twinkle track 
         case '1':
         {
-            if (DEBUG) Serial.print("Assigning Voices...");
             Player player;
             int song_length = sizeof(twinkle_twinkle.tracks[0].freq) / sizeof(twinkle_twinkle.tracks[0].freq[0]);
 
@@ -90,6 +90,18 @@ void automatic_loop()
         //Hicory Dickory Dock 
         case '2':
         {
+            Player player;
+            int song_length = sizeof(jingle_bell_rock.tracks[0].freq) / sizeof(jingle_bell_rock.tracks[0].freq[0]);
+
+            float* beats0 = jingle_bell_rock.tracks[0].beats;
+            convert_to_period(beats0, beats_per_min, song_length);
+            player.assign_voice(jingle_bell_rock.tracks[0].freq, beats0, buzzer_pins[0]);
+
+            float* beats1 = jingle_bell_rock.tracks[1].beats;
+            convert_to_period(beats1, beats_per_min, song_length);
+            player.assign_voice(jingle_bell_rock.tracks[1].freq, beats1, buzzer_pins[1]);
+            
+            player.start();
             break;
         }
 

@@ -88,12 +88,24 @@ void Player::update_next_note(int voice_index)
         return;
     }
 
-    // Update the voice's properties as needed
-    period = (1 / (voice->freq_arr[voice->song_index])) * 1000000L;
-    voice->us_half_period = (long) period / 2L;
-    voice->us_toggle = voice->us_half_period;
-    voice->us_end = (voice->note_lengths[voice->song_index]) * 1000L;
-    voice->song_index ++;
+    // Check if resting - Denoted by a zero frequency
+    if (voice->freq_arr[voice->song_index] == 0)
+    {
+        voice->is_resting = true;
+        voice->us_end = (voice->note_lengths[voice->song_index]) * 1000L;
+        voice->song_index ++;
+        return;
+    }
+    else
+    {
+        // Update the voice's properties as needed
+        voice->is_resting = false;
+        period = (1 / (voice->freq_arr[voice->song_index])) * 1000000L;
+        voice->us_half_period = (long) period / 2L;
+        voice->us_toggle = voice->us_half_period;
+        voice->us_end = (voice->note_lengths[voice->song_index]) * 1000L;
+        voice->song_index ++;
+    }
 
     if (DEBUG)
     {
@@ -160,11 +172,11 @@ void Player::cycle()
         }
         
         // Check if time to toggle buzzer pin
-        if (voices[i].us_toggle <= 0)
+        if (voices[i].us_toggle <= 0 && !voices[i].is_resting)
         {
             toggle_voice_buzzer(i);
         }
-
+        
         decrement_times(i);
     }
     last_cycle = micros();

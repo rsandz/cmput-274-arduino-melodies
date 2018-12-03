@@ -31,6 +31,12 @@ struct Voice {
     bool voice_end;
 
     /**
+     * Whether it's resting (Not playing note)
+     * Denoted by a zero frequency
+     */
+    bool is_resting;
+
+    /**
      * Buzzer for this voice to play on
      */
     int buzzer_pin;
