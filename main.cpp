@@ -119,30 +119,35 @@ int main()
 
     // Initailize if the player wants to play the piano or listen to music 
     char choice;
-
-    Serial.println("Press <p> if you want to play, Press <t> if you want to listen to a track");
-    choice = check();
-
-    switch((char) choice)
+    char repeat = 'y';
+    while ((repeat == 'y') || (repeat == 'Y'))
     {
-        // Manual Mode
-        case 'p':
-        {
-            manual_loop();
-            break; 
-        }
+            Serial.println("Press <p> if you want to play, Press <t> if you want to listen to a track");
+            choice = check();
 
-        // Automatic Mode
-        case 't':
-        {
-            automatic_loop();
-            break;
-        }
+            switch((char) choice)
+            {
+                // Manual Mode
+                case 'p':
+                {
+                    manual_loop();
+                    break; 
+                }
 
-        default: Serial.print("Error: Please start again");
+                // Automatic Mode
+                case 't':
+                {
+                    automatic_loop();
+                    break;
+                }
+
+                default: Serial.print("Error: Please start again");
+            }
+            Serial.print("Do you want to play again? (y/n)");
+            repeat = check();
     }
-
     Serial.print("Done");
     Serial.flush();
     return 0;
+
 }
