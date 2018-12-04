@@ -124,6 +124,8 @@ void automatic_mode()
 int main()
 {
     setup();
+    Serial.print("WELCOME TO ARDUINO MUSIC PLAYER");
+    Serial.print("THE BRAND NEW PIANO AND TRACK PLAYER WITH ALL YOUR FAVOURITE CHRISTMAS SONGS!")
 
     // Initailize if the player wants to play the piano or listen to music 
     char choice;
