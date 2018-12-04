@@ -6,13 +6,13 @@
 #include "config.h"
 #include "input.h"
 #include "tone.h"
-#include "test.h"
 #include  "songs.h"
 #include  "utilities.h"
 #include <Arduino.h>
 
 /**
  * Setup for lowlevel arduino functionality
+ * Also converts beats array into seconds.
  */
 void setup()
 {
@@ -34,28 +34,11 @@ void setup()
         {
             beat_arr_length = sizeof(songs[i].tracks[k].beats) / 
                 sizeof(songs[i].tracks[k].beats[0]);
-            convert_to_period(songs[i].tracks[k].beats, beats_per_min, beat_arr_length);
+            convert_to_period(songs[i].tracks[k].beats, beats_per_min, 
+                beat_arr_length);
         }
     }
 
-}
-
-/**
- * Gets the last key that the user presses.
- * This function is Blocking
- */
-char get_key()
-{ 
-    char check;
-    while (true)
-    {
-        if(Serial.available()>0)
-        {
-           check = Serial.read(); 
-           break;
-        }
-    }
-    return check;
 }
 
 /**
@@ -65,14 +48,45 @@ char get_key()
  */
 void manual_mode()
 {
-    // keyboard piano player 
     char key, sound;
     float freq;
-    Serial.print("Pick a setting that you want to play: z - Low pitch, x - Mid Pitch, c - High Pitch");
-    sound = get_key();
+
+    // Instructions
+    Serial.println("Manual Mode Selected");
+    Serial.println("See Piano keys in the README.");
+    Serial.println("Press `q` to quit.");
+    Serial.println("Press 'z', 'x' or 'c' to switch pitch");
+    sound = 'x';
     while (true)
     {
         key = get_key(); //Serial.read();
+        
+        // Check if quit or octave switch
+        if (key == 'q') break;
+
+        switch (key)
+        {
+            case 'z':
+            {
+                Serial.println("Switching to Low Pitch");
+                sound = key;
+                break;
+            }
+            case 'x':
+            {
+                Serial.println("Switching to Mid Pitch");
+                sound = key;
+                break;
+            }
+            case 'c':
+            {
+                Serial.println("Switching to High Pitch");
+                sound = key;
+                break;
+            }
+        }
+
+        // Play the Note
         freq = keyboard_to_freq((char) sound, (char) key);
         
         if (DEBUG)
@@ -80,7 +94,8 @@ void manual_mode()
             Serial.print("Playing Freq: ");
             Serial.println(freq);
         }
-        play_tone(freq, 150);
+
+        play_tone(freq, manual_note_length);
     }
 }
 
@@ -92,10 +107,13 @@ void manual_mode()
 void automatic_mode()
 {
     //This is the track player case 
-    // Ask them wha track do they want to play out of the three ---> nested Switch statements 
+    // Ask them wha track do they want to play out of the three
     int song_num;
     float* note_lengths[num_buzzers];
 
+    // Show Instructions
+    Serial.print("Current Beats per minute is ");
+    Serial.println(beats_per_min);
     Serial.println("Choose a track: ");
     for (int i = 0; i < num_songs; i++)
     {
@@ -104,12 +122,16 @@ void automatic_mode()
         Serial.println(songs[i].title);
     }
 
+    // Song selection
     song_num = (int) get_key() - 49; // Note that '1' == 49 and we want '1' to be equal to int 0
-    Serial.println(song_num);
+    Serial.print("Song #");
+    Serial.print(song_num);
+    Serial.println(" was selected");
     if (DEBUG) Serial.print("Assigning Voices...");
 
     // Create a player to play the song
     Player player;
+    player.cycle_length = cycle_length;
 
     for (int i = 0; i < songs[song_num].num_voices; i++)
     {
@@ -124,10 +146,14 @@ void automatic_mode()
 int main()
 {
     setup();
-    Serial.print("WELCOME TO ARDUINO MUSIC PLAYER");
-    Serial.print("THE BRAND NEW PIANO AND TRACK PLAYER WITH ALL YOUR FAVOURITE CHRISTMAS SONGS!")
 
-    // Initailize if the player wants to play the piano or listen to music 
+    Serial.println("===============================");
+    Serial.println("WELCOME TO ARDUINO MUSIC PLAYER");
+    Serial.println("===============================");
+    Serial.println("THE BRAND NEW PIANO AND TRACK PLAYER WITH ALL YOUR FAVOURITE SONGS!");
+
+    // Initialize if the player wants to play the piano or listen to music 
+    // Loop forever
     char choice;
     char repeat = 'y';
     while ((repeat == 'y') || (repeat == 'Y'))
@@ -151,12 +177,16 @@ int main()
                     break;
                 }
 
-                default: Serial.print("Error: Please start again");
+                default: 
+                {
+                    Serial.println("Please press a valid key.");
+                    continue;
+                }
             }
-            Serial.print("Do you want to play again? (y/n)");
+            Serial.println("Do you want to play again? (y/n)");
             repeat = get_key();
     }
-    Serial.print("Done");
+    Serial.println("The Program has quit");
     Serial.flush();
     return 0;
 

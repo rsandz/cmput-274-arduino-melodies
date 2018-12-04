@@ -1,7 +1,7 @@
 # cmput-274-arduino-melodies
 **By Imtisal Ahmad and Ryan Sandoval**
-Name : Imtisal Ahmad and Ryan Sandolva 
-ID #: 1495401 and 
+Name : Imtisal Ahmad and Ryan Sandoval
+ID #: 1495401 and  1529017
 CMPUT 274 Fa18
 Project:
 
@@ -24,20 +24,67 @@ Project Description:
 We have created a manual/ automatic music player for our project with an arduino and two buzzers.The music player program has two usages: it can be used a 
 keyboard piano player or as a musical track player both with 3 choices. They user can choose three sets of notes to play on the piano keyboard or three tracks from our provided list to play on the track player option.
 
+Wiring Instructions:
+   *For any buzzers:
+    
+        pin # (To be recorded in config file) <---> Buzzer <---> [optional] resistor <---> GND
+    
+    Note, resistors are optional as they can be used to reduce buzzer volume. Put more resistance
+    on the buzzer you want less volume for.
+
 Running Instuctions:
-   * Set up the arduinos: buzzers should be connected to pins 12 ,11 
-   * Now connect your arduinos to your computer using a usb cabels.
-   * Download the project.tar.gz file from eclass
-   * Extract all the contents from the project.tar.gz file to another folder such as your documents or desktop 
-   * Open the now extracted project folder, then open the terminal for the following directory, type in make hit enter, then type make upload. 
-   * Then on the terminal window the track player will appear, answer the prompt to either play the piano or listen to track. 
-   * For the piano part you can choose three different sets of notes to play, as prompted by the terminal.Make sure that you use the 
-   following keys: d,f,g,h,j,k,l,;,r,t,u,i,o inorder for the keyboard to play like a piano.
-   * For the track player just pick a prompted track out of the 3 provided ,and the 2 buzzers will play it for you.
-   
+    Setup:
+    * Unzip the compressed file into a directory and then open a cmd terminal at that
+        directory.
+    * Now connect your arduinos to your computer using a usb cables.
+    * Set up the arduinos: e.g. buzzers should be connected to pins 12 ,11
+    * Edit the config.h file as needed.
+    * Run `make upload` in your terminal
+    * Then on the terminal window the track player will appear, answer the prompt to either play the piano or listen to track. 
+    * For the piano part you can choose three different sets of notes to play, as prompted by the terminal. Make sure that you use the 
+    following keys: d,f,g,h,j,k,l,;,r,t,u,i,o inorder for the keyboard to play like a piano.
+    * For the track player just pick a prompted track out of the ones provided ,and the buzzers will play it for you.
+
+Keyboard Notes:
+    - You can only play 1 note at a time at 150ms each! Editable in config.
+    - Switch octaves (low, mid, high) using z, x, c keys
+    - Mappings:
+    In form `key` => `note`
+    Naturals:
+    - d => C (low)
+    - f => D
+    - g => E
+    - h => F
+    - j => G
+    - k => A
+    - l => B
+    - ; => C (high)
+
+    Flats:
+    - r => Db
+    - t => Eb
+    - u => Gb
+    - i => Ab
+    - o => Bb
+
+Creating Songs:
+    - Make them in songs.h
+    - Examples are provided in there
+    - Each voice needs 2 arrays:
+        - Frequency array (Notes to play)
+        - Beats array (How long to play them)
+            - Beats array gets turned into seconds based on beats per second
+    - Due to memory constraints, the above arrays have been limited to 90 elements.
+    - This may be increased, however, you must derease the amount of loaded songs
+    - The amount left in memory can be seen after running `make`
+    - All fields in the struct definitions must be filled out!
 
 Notes and Assumptions:
 
+   * The program can theoretically work with 3 buzzers, but has yet to be tested so functionality has
+   been limited to 2 only.
+   * Due to clock limitations, 2 voices may cause lower note frequency and longer note lengths.
+        - Examples of this are present as song 3 and song 4.
    * The file project.cpp contains a file called main.cpp which calls on the input.cpp and config.h files inorder to prompt and take in user input for the keyboard piano and track player. The config.h file is our set up file for the project, with all our arduino settings.The input.cpp file mainly deals with the manual (keyboard piano) aspect of our project, while the utilites.cpp, utilites.h  and song.h files are related to the automatic (track player) option of the project. The tone file contain code for the 2 buzzers running at the same time, which is used in both the manual and automatic part of the songs.
 
 

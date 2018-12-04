@@ -44,8 +44,12 @@ Player::Player()
 }
 
 /**
- * Assigns a voice to the player.
+ * Saves a new voice struct in the player. 
  * cycle() will then update the buzzers based on voice in order to make music.
+ * @param float * freq Pointer to frequency array
+ * @param float * note_lengths Pointer to array containing how long to play
+ *                              above freqs
+ * @param int buzzer_pin Which buzzer pin to play this voice
  */
 
 void Player::assign_voice(float* freq, float* note_lengths, int buzzer_pin)
@@ -53,7 +57,7 @@ void Player::assign_voice(float* freq, float* note_lengths, int buzzer_pin)
     if (total_voices < num_buzzers)
     {
         // Total voices in this case has not been incremented.
-        // it can be used to add the nex voice into the voices array
+        // it can be used to add the next voice into the voices array
         voices[total_voices].freq_arr = freq;
         voices[total_voices].note_lengths = note_lengths; // In milliseconds
         voices[total_voices].buzzer_pin = buzzer_pin;
@@ -73,7 +77,12 @@ void Player::assign_voice(float* freq, float* note_lengths, int buzzer_pin)
 }
 
 /**
- * Sets the voice to play the next note
+ * Updates a voice in the voice array with index `voice index` to
+ * play its next note in its freq array. 
+ * Can also detect if the song ends (freq == -1)
+ * and if the voice is resting (freq == 0)
+ * Does not actually do the playing. See toggle_voice_buzzer
+ * for that.
  * @param int voice_index The voice index to change
  */
 void Player::update_next_note(int voice_index)
@@ -121,13 +130,13 @@ void Player::update_next_note(int voice_index)
 
 /**
  * Causes the buzzer of a voice to toggle high or low.
+ * Running this every period/2 of the voice will cause it 
+ * to play the corresponding frequency
  * @param Voice voice The voice to toggle
  */
 void Player::toggle_voice_buzzer(int voice_index)
 {
     Voice* voice = voices + voice_index;
-    
-    // Toggle
     digitalWrite(voice->buzzer_pin, !voice->last_state);
     voice->last_state = !voice->last_state;
     voice->us_toggle = voice->us_half_period;
@@ -135,6 +144,8 @@ void Player::toggle_voice_buzzer(int voice_index)
 
 /**
  * Decrements the us_half_period and us_end in voices
+ * Used for timing next pin output toggle and when
+ * the next note should be played
  * @param Voice voice
  */
 void Player::decrement_times(int voice_index)
@@ -145,9 +156,14 @@ void Player::decrement_times(int voice_index)
 }
 
 /**
- * Cycles through each buzzer and updates their state, 
+ * Cycles through each buzzer and updates their output, 
  * current note and time tracking.
- * Cycle must be ran in a loop as fast as possible
+ * Cycle must be ran in a loop as fast as possible to get
+ * the best sound
+ * Note: 
+ * Due to low clock speed, actual pitch may be 
+ * lower and length of notes may be longer based on how many
+ * buzzers needs to be cycled through
  */
 void Player::cycle()
 {
@@ -179,6 +195,7 @@ void Player::cycle()
         
         decrement_times(i);
     }
+
     last_cycle = micros();
 }
 
@@ -192,7 +209,7 @@ void Player::start()
     {
         cycle();
 
-        // Check if song is done
+        // Find how many voices are done.
         done_voices = 0;
         for (int i = 0; i < total_voices; i++)
         {

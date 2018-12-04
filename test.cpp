@@ -1,10 +1,14 @@
 /**
  * Tests 13 notes on the buzzer
+ * Depreciated
  */
 #include <Arduino.h>
 #include "tone.h"
 #include "config.h"
 
+/**
+ * Plays a chromatic scale
+ */
 void scale_test()
 {
     play_tone(a4 , 200);
@@ -21,6 +25,9 @@ void scale_test()
     play_tone(G4 , 200);
 }
 
+/**
+ * Plays twinkle twinkle little star
+ */
 void twinkle()
 {
     delay(1000);
@@ -31,11 +38,11 @@ void twinkle()
     play_tone(_A5, 500);
     play_tone(_A5, 500);
     play_tone(G4, 1000);
-    // play_tone(F4, 500);
-    // play_tone(F4, 500);
-    // play_tone(E4, 500);
-    // play_tone(E4, 500);
-    // play_tone(D4, 500);
-    // play_tone(D4, 500);
-    // play_tone(C4, 1000);
+    play_tone(F4, 500);
+    play_tone(F4, 500);
+    play_tone(E4, 500);
+    play_tone(E4, 500);
+    play_tone(D4, 500);
+    play_tone(D4, 500);
+    play_tone(C4, 1000);
 }
