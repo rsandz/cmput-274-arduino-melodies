@@ -19,8 +19,7 @@
  * and it's corresponding length to play it at.
  * Eacb track occupies one buzzer. i.e. 1 track per buzzer
  */
-struct Track
-{
+struct Track {
     // Note, max length per track is 100 notes
     float freq[90];
     float beats[90];
@@ -30,8 +29,7 @@ struct Track
  * Holds several tracks (a.k.a. voices)
  * Can be loaded into a player in order to play a song.
  */
-struct Song 
-{
+struct Song {
     char title[30];
     int num_voices;
     struct Track tracks[2];
