@@ -9,13 +9,11 @@
  * frequency value to the main() function which will decide what frequency or musical note to play for the corresponding keys 
  * pressed.
  */
-void convert_to_period(float beats[], int bpm, int array_size)
-{
-    //get the number of elements in the beats array
-    for( int i = 0; i < array_size; i++)
-    {
-        beats[i] = beats[i] / (float) bpm * 6.0e4;
-        //the answer is in minutes so convert it to milliseconds with 6e4
+void convert_to_period(float beats[], int bpm, int array_size) {
+    // get the number of elements in the beats array
+    for (int i = 0; i < array_size; i++) {
+        beats[i] = beats[i] / <float> bpm * 6.0e4;
+        // the answer is in minutes so convert it to milliseconds with 6e4
     }
 }
 
@@ -24,14 +22,11 @@ void convert_to_period(float beats[], int bpm, int array_size)
  * This function is Blocking
  * @return char the key pressed
  */
-char get_key()
-{ 
+char get_key() {
     char check;
-    while (true)
-    {
-        if(Serial.available()>0)
-        {
-           check = Serial.read(); 
+    while (true) {
+        if (Serial.available() > 0) {
+           check = Serial.read();
            break;
         }
     }

@@ -9,8 +9,7 @@
 /**
  * Plays a chromatic scale
  */
-void scale_test()
-{
+void scale_test() {
     play_tone(a4 , 200);
     play_tone(_A4 , 200);
     play_tone(b4 , 200);
@@ -28,8 +27,7 @@ void scale_test()
 /**
  * Plays twinkle twinkle little star
  */
-void twinkle()
-{
+void twinkle() {
     delay(1000);
     play_tone(C4, 500);
     play_tone(C4, 500);
