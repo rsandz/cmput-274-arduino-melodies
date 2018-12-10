@@ -70,18 +70,21 @@ void manual_mode()
             {
                 Serial.println("Switching to Low Pitch");
                 sound = key;
+                continue;
                 break;
             }
             case 'x':
             {
                 Serial.println("Switching to Mid Pitch");
                 sound = key;
+                continue;
                 break;
             }
             case 'c':
             {
                 Serial.println("Switching to High Pitch");
                 sound = key;
+                continue;
                 break;
             }
         }
