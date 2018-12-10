@@ -9,7 +9,7 @@
 const int num_buzzers = 2;
 const int buzzer_pins[] = {12, 11};
 const int DEBUG = false; // Set to true to enable debug output
-const int beats_per_min = 116; // Default 140
+const int beats_per_min = 140; // Default 140
 const int manual_note_length = 150; // Note length per press in manual mode
 
 // How many us to wait till updating buzzers
