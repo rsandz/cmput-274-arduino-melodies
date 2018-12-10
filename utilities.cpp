@@ -12,7 +12,7 @@
 void convert_to_period(float beats[], int bpm, int array_size) {
     // get the number of elements in the beats array
     for (int i = 0; i < array_size; i++) {
-        beats[i] = beats[i] / <float> bpm * 6.0e4;
+        beats[i] = beats[i] / (float) bpm * 6.0e4;
         // the answer is in minutes so convert it to milliseconds with 6e4
     }
 }

@@ -25,9 +25,13 @@ We have created a manual/ automatic music player for our project with an arduino
 keyboard piano player or as a musical track player both with 3 choices. They user can choose three sets of notes to play on the piano keyboard or three tracks from our provided list to play on the track player option.
 
 Wiring Instructions:
-   *For any buzzers:
-    
+   * For any buzzers:
         pin # (To be recorded in config file) <---> Buzzer <---> [optional] resistor <---> GND
+
+    * Default: 
+        pin 12 <---> Buzzer 1 <---> GND
+        pin 11 <---> Buzzer 2 <---> 560 resistor <---> GND
+
     
     Note, resistors are optional as they can be used to reduce buzzer volume. Put more resistance
     on the buzzer you want less volume for.
@@ -37,16 +41,20 @@ Running Instuctions:
     * Unzip the compressed file into a directory and then open a cmd terminal at that
         directory.
     * Now connect your arduinos to your computer using a usb cables.
-    * Set up the arduinos: e.g. buzzers should be connected to pins 12 ,11
+    * Set up the arduinos: e.g. buzzers should be connected to pins 12 ,11. See Wiring Instructions
     * Edit the config.h file as needed.
     * Run `make upload` in your terminal
     * Then on the terminal window the track player will appear, answer the prompt to either play the piano or listen to track. 
     * For the piano part you can choose three different sets of notes to play, as prompted by the terminal. Make sure that you use the 
     following keys: d,f,g,h,j,k,l,;,r,t,u,i,o inorder for the keyboard to play like a piano.
     * For the track player just pick a prompted track out of the ones provided ,and the buzzers will play it for you.
+    * After a track has played or the quit button is played in the manual mode, the arduino will ask whether
+        you want to play again. Press `y` to do so, any other key will quit the program.
 
 Keyboard Notes:
     - You can only play 1 note at a time at 150ms each! Editable in config.
+    - Pressing a key not defined below will cause the player to play a zero frequency note.
+        - This usually causes an audible pop in buzzers, to indicate that the note is undefined.
     - Switch octaves (low, mid, high) using z, x, c keys
     - Mappings:
     In form `key` => `note`
@@ -70,10 +78,16 @@ Keyboard Notes:
 Creating Songs:
     - Make them in songs.h
     - Examples are provided in there
+    - Each song can have a number of voices. (Configurable)
     - Each voice needs 2 arrays:
         - Frequency array (Notes to play)
+            - Use note definitions in config.h
+            - Use `0` (Zero Frequency) for a rest/silence
+            - Use `-1` frequency to tell the music player that the song has ended. (Put the -1 at the end)
+                - If this is forgotten, the arduino player may glitch.
         - Beats array (How long to play them)
             - Beats array gets turned into seconds based on beats per second
+    - The 2 arrays above must be of same length
     - Due to memory constraints, the above arrays have been limited to 90 elements.
     - This may be increased, however, you must derease the amount of loaded songs
     - The amount left in memory can be seen after running `make`
@@ -84,7 +98,8 @@ Notes and Assumptions:
    * The program can theoretically work with 3 buzzers, but has yet to be tested so functionality has
    been limited to 2 only.
    * Due to clock limitations, 2 voices may cause lower note frequency and longer note lengths.
-        - Examples of this are present as song 3 and song 4.
+        - Examples of this are present as song 3 and song 4 (Metal Crusher 2 voice vs Metal Crusher 1 voice).
    * The file project.cpp contains a file called main.cpp which calls on the input.cpp and config.h files inorder to prompt and take in user input for the keyboard piano and track player. The config.h file is our set up file for the project, with all our arduino settings.The input.cpp file mainly deals with the manual (keyboard piano) aspect of our project, while the utilites.cpp, utilites.h  and song.h files are related to the automatic (track player) option of the project. The tone file contain code for the 2 buzzers running at the same time, which is used in both the manual and automatic part of the songs.
+   * Don't run 2 Serial-mons at the same time and don't upload while serial-mon is on.
 
 

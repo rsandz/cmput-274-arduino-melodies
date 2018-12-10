@@ -1,6 +1,5 @@
 /**
  * Tests 13 notes on the buzzer
- * Depreciated
  */
 #include <Arduino.h>
 #include "tone.h"

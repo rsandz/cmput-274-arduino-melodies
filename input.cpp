@@ -10,6 +10,7 @@
  * This function uses a switch statement to assign frequencies to the key values.Then it passes the key 
  * frequency value to the main() function which will decide what frequency or musical note to play for the corresponding keys 
  * pressed.
+ * We set the freq to manual_note_length if an undefined key is pressed to prevent any sound
  * @key char stores the ascii value of the key pushed on the keyboard
  * @note float  holds the musical notes or frequencies associated with the corresponding keys 
  */
@@ -78,7 +79,7 @@ float keyboard_to_freq(char sound, char key) {
 
         // second case of frequiencies
          case 'x': {
-            switch (<char> key) {
+            switch (key) {
                 // all the whites
                 case 'd':
                     note = C4;

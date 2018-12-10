@@ -32,7 +32,7 @@ struct Track {
 struct Song {
     char title[30];
     int num_voices;
-    struct Track tracks[2];
+    struct Track tracks[2];  // Number of tracks per song
 };
 
 /*
@@ -57,7 +57,7 @@ struct Song songs[] =
                     G4, G4, F4, F4, E4, E4, D4, D4, 
                     G4, G4, F4, F4, E4, E4, D4, D4,
                     C4, C4, G4, G4, _A4, _A4, G4, G4, F4, F4, E4, E4, D4, D4, E4, C4,
-                    -1
+                    -1  // To end the voice
                 },
 
                 // Beats
@@ -77,7 +77,7 @@ struct Song songs[] =
                     E5, G4, D5, G4, C5, G4, B3, G4, 
                     E5, G4, D5, G4, C5, C5, D5, C5, B4,
                     C4, C5, E5, C5, F5, C5, E5, C5, D5, B4, C5, _A4, F4, G4, C4,
-                    -1
+                    -1  // End the voice
                 },
 
                 // Beats
