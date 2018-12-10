@@ -22,7 +22,7 @@ const int cycle_length = 28;
 // Note: we put _ in front of 'A's to prevent name collision
 // with arduino analog pin
 
-//Naturals
+// Naturals
 const float C2 = 65.40639;
 const float D2 = 73.41619;
 const float E2 = 82.40689;
@@ -58,7 +58,7 @@ const float F6 = 1396.913;
 const float G6 = 1567.982;
 const float _A6 = 1760.000;
 
-//Flats
+// Flats
 
 const float e1 = 38.89087;
 const float a1 = 51.91309;
